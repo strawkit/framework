@@ -1,0 +1,29 @@
+{
+    "name": "strawkit/framework",
+    "description": "The framework for running tests",
+    "type": "library",
+    "require": {
+        "symfony/console": "^4.3",
+        "phpunit/php-timer": "^2.1",
+        "roave/better-reflection": "^3.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ashley Clarke",
+            "email": "me@ashleyclarke.me"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "StrawKit\\Framework\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/straw"
+    ]
+}
