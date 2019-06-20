@@ -2,12 +2,6 @@
 
 namespace StrawKit\Framework\Commands;
 
-use function Composer\Autoload\includeFile;
-use Roave\BetterReflection\BetterReflection;
-use Roave\BetterReflection\Reflector\ClassReflector;
-use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
-use Roave\BetterReflection\SourceLocator\Type\DirectoriesSourceLocator;
-use Roave\BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
 use SebastianBergmann\Timer\Timer;
 use StrawKit\Framework\Executioner;
 use StrawKit\Framework\Locators\ClassLocator;
