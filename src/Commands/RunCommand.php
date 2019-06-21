@@ -20,7 +20,7 @@ class RunCommand extends Command
     {
         $this->setName('run');
         $this->setDescription('Run the tests');
-        $this->addArgument('path', InputArgument::OPTIONAL, '');
+        $this->addArgument('path', InputArgument::REQUIRED, 'path to tests');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -40,10 +40,6 @@ class RunCommand extends Command
 
     public function path(InputInterface $input)
     {
-        if ($path = $input->getArgument('path')) {
-            return getcwd() . '/' . $path;
-        }
-
-        return getcwd();
+        return getcwd() . '/' . $input->getArgument('path');
     }
 }
