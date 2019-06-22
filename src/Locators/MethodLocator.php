@@ -7,6 +7,12 @@ use ReflectionMethod;
 
 class MethodLocator
 {
+    protected static $hidden = [
+        '__construct', '__destruct', '__call', '__callStatic', '__get',
+        '__set', '__isset', '__unset', '__sleep', '__wakeup', '__toString',
+        '__invoke', '__set_state', '__clone', '__debugInfo', 'before', 'after'
+    ];
+
     /**
      * @param ReflectionClass $class
      * @return ReflectionMethod[]
@@ -20,7 +26,7 @@ class MethodLocator
                 continue;
             }
 
-            if (in_array($method->getName(), ['before', 'after'])) {
+            if (in_array($method->getName(), static::$hidden)) {
                 continue;
             }
 

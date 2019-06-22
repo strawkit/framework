@@ -10,9 +10,9 @@ use StrawKit\Framework\Testing\Before;
 
 class Executioner
 {
-    public static function execute(ReflectionClass $class, ReflectionMethod $method)
+    public static function execute(ReflectionClass $class, ReflectionMethod $method, $config = [])
     {
-        $instance = $class->newInstance();
+        $instance = $class->newInstance($config);
 
         if ($class->implementsInterface(Before::class)) {
             call_user_func_array([$instance, 'before'], []);

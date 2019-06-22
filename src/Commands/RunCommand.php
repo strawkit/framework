@@ -13,9 +13,12 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Yaml\Yaml;
 
 class RunCommand extends Command
 {
+    protected $config;
+
     protected function configure()
     {
         $this->setName('run');
@@ -31,7 +34,7 @@ class RunCommand extends Command
 
         foreach (ClassLocator::list($path) as $class) {
             foreach (MethodLocator::list($class) as $method) {
-                Executioner::execute($class, $method);
+                Executioner::execute($class, $method, $this->config());
             }
         }
 
@@ -41,5 +44,25 @@ class RunCommand extends Command
     public function path(InputInterface $input)
     {
         return getcwd() . '/' . $input->getArgument('path');
+    }
+
+    /**
+     * Load config from local file.
+     *
+     * @return array
+     */
+    public function config(): array
+    {
+        if (!is_null($this->config)) {
+            return $this->config;
+        }
+
+        if (file_exists($config = getcwd() . '/strawkit.yml')) {
+            $this->config = Yaml::parseFile($config);
+        } else {
+            $this->config = [];
+        }
+
+        return $this->config;
     }
 }
